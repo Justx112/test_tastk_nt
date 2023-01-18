@@ -1,0 +1,105 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+.terminal {
+    display: flex;
+    flex-direction: column;
+    background-color: grey;
+    padding: 10px 10px;
+    border-radius: 3px;
+    position: relative;
+}
+
+.terminal__options {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 31px;
+    right: 11px;
+}
+
+.terminal__choise {
+    display: block;
+    background-color: rgb(53, 53, 53);
+    border-top: 1px solid black;
+    width: 175px;
+}
+
+.input {
+    width: auto;
+    height: 20px;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 1px solid black;
+    background-color: transparent;
+    color: inherit;
+    outline: none;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.input_error {
+    width: auto;
+    height: 20px;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 1px solid red;
+    background-color: transparent;
+    color: inherit;
+    outline: none;
+    margin-bottom: 30px;
+    text-align: center;
+    animation: blink 0.5s ease-out;
+}
+
+@keyframes blink {
+    0% {
+        border-bottom: 1px solid rgb(0, 0, 0);
+    }
+    100% {
+        border-bottom: 1px solid red;
+    }
+}
+
+.input:focus {
+    border-color: white;
+}
+
+.terminal__buttons_container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.terminal_button_buy {
+    background-color: #3e8350;
+    border-radius: 28px;
+    border: 1px solid #18ab29;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    padding: 4px 14px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #2f6627;
+}
+
+.terminal_button_buy:hover {
+    background-color: #6abe40;
+}
+
+.terminal_button_sell {
+    background-color: #773232;
+    border-radius: 28px;
+    border: 1px solid #b81717;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    padding: 4px 14px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #2f6627;
+}
+
+.terminal_button_sell:hover {
+    background-color: #ff1a1a;
+}
