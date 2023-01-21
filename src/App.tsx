@@ -1,5 +1,6 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import './App.css';
+import { SelfOrdersElemets } from './components/self_orders';
 import {Terminal} from './components/terminal'
 import { sender } from "./WSClient"
 
@@ -14,6 +15,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <Terminal />
+        <SelfOrdersElemets />
       </header>
     </div>
   );

@@ -5,11 +5,15 @@ input::-webkit-inner-spin-button {
 
 .terminal {
     display: flex;
+    width: 175px;
     flex-direction: column;
     background-color: grey;
     padding: 10px 10px;
     border-radius: 3px;
     position: relative;
+    align-self: end;
+    justify-self: center;
+    grid-row-start: 2;
 }
 
 .terminal__options {

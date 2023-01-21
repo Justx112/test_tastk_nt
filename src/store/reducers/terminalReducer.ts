@@ -1,10 +1,19 @@
-import { useDispatch } from "react-redux"
-import { Instrument, OrderSide, ClientMessageType } from "../../Enums"
+import {  OrderSide } from "../../Enums"
+import { Decimal } from 'decimal.js';
 
 export interface IBodyMessage{
     typeInstrument: string,
+    price: Decimal,
+    amount: Decimal,
+    orders: SelfOrder[],
+}
+
+export interface SelfOrder{
+    id: number,
+    typeInstrument: string,
+    price: Decimal,
+    amount: Decimal,
     orderSide: OrderSide,
-    amount: number,
 }
 
 export interface IUserAction{
@@ -14,37 +23,34 @@ export interface IUserAction{
 
 const defaultState: IBodyMessage ={
     typeInstrument: "USD/RUB",
-    orderSide: OrderSide.sell,
-    amount: 0
+    price: new Decimal(0),
+    amount: new Decimal(0),
+    orders: []
 }
 
 const setType = "SET_TYPE"
-const setOrderSide = "SET_ORED_SIDE"
 const setAmount = "SET_AMOUNT"
-const resetForm = "RESET_FORM"
+const setPrice = "SET_PRICE"
+const addSelfOrder = "AAD_SELF_ORDER"
+
 
 export const terminalReducer = (state = defaultState, action: IUserAction):IBodyMessage=>{
     switch(action.type){
         case setType:
             return { ...state, typeInstrument: action.payload }
-        case setOrderSide:
-            let newState = { ...state, orderSide: action.payload }
-            SendMessage(newState)
-            return {...state, orderSide:action.payload}
         case setAmount:
             return {...state, amount:action.payload}
-        case resetForm:
-            return defaultState
+        case setPrice:
+            return {...state, price:action.payload}
+        case addSelfOrder:
+            return { ...state, orders: [...state.orders, action.payload]}
         default:
             return state
     }
 }
 
 
-function SendMessage(data:IBodyMessage){
-}
-
 export const setTypeAction = (payload: string) => ({ type: setType, payload: payload })
-export const setOrderSideAction = (payload: OrderSide) => ({type: setOrderSide, payload})
-export const setAmountAction = (payload: number) => ({type: setAmount, payload: payload})
-export const resetFormAction = () => ({type:resetForm})
+export const setAmountAction = (payload: number) => ({ type: setAmount, payload: new Decimal(payload)})
+export const setPriceAction = (payload: number) => ({ type: setPrice, payload: new Decimal(payload)})
+export const addSelfOrderAction = (payload: SelfOrder) => ({ type: addSelfOrder, payload: payload })

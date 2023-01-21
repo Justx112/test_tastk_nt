@@ -1,8 +1,9 @@
 import {ClientMessage} from "./Models/ClientMessages";
 import {ClientMessageType, Instrument, OrderSide, ServerMessageType} from "./Enums";
 import Decimal from "decimal.js";
-import {ServerEnvelope} from "./Models/ServerMessages";
-
+import {MarketUpdate} from "./Models/ServerMessages";
+import { store } from "./store";
+import { getMarketAction } from "./store/reducers/errorTerminalReducer";
 
 export class WSConnector {
   connection: WebSocket | undefined;
@@ -12,7 +13,7 @@ export class WSConnector {
   }
 
   connect = () => {
-    this.connection = new WebSocket('ws://127.0.0.1:3000/ws/');
+    this.connection = new WebSocket('ws://localhost:5000');
     this.connection.onclose = () => {
       this.connection = undefined;
     };
@@ -26,7 +27,7 @@ export class WSConnector {
     };
 
     this.connection.onmessage = (event) => {
-      const message: ServerEnvelope = JSON.parse(event.data);
+      const message: MarketUpdate = JSON.parse(event.data);
       switch (message.messageType) {
         case ServerMessageType.success:
 
@@ -38,7 +39,7 @@ export class WSConnector {
 
           break;
         case ServerMessageType.marketDataUpdate:
-
+          store.dispatch(getMarketAction(message.message));
           break;
       }
     };

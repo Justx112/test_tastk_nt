@@ -1,5 +1,6 @@
 import {Instrument, OrderStatus} from "../Enums";
-import {Envelope, Message, Quote} from "./Base";
+import { IMarketMessage } from "../store/reducers/errorTerminalReducer";
+import {Envelope, Message } from "./Base";
 
 export interface ServerEnvelope extends Envelope {
     messageType: ServerMessage
@@ -22,8 +23,14 @@ export interface ExecutionReport extends ServerMessage {
     orderStatus: OrderStatus
 }
 
-export interface MarketDataUpdate extends ServerMessage {
+export interface MarketUpdate extends ServerMessage {
+    messageType: ServerMessage,
+    message: MarketMessage
+}
+
+export interface MarketMessage {
     subscriptionId: string
     instrument: Instrument
-    quotes: [Quote]
+    quotes: IMarketMessage[]
+
 }

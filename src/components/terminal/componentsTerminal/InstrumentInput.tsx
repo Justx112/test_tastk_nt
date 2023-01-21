@@ -1,7 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { typedUseSelector } from "../../../store";
-import { setInstrumentErrorAction } from "../../../store/reducers/errorTerminalReducer";
 import { setTypeAction } from "../../../store/reducers/terminalReducer";
 
 export function InstrumentInput() {

@@ -1,0 +1,31 @@
+.header {
+    display: grid;
+    height: 20vh;
+    grid-template-columns: 1fr 2fr 2fr 1fr;
+    grid-row-start: 3;
+    justify-self: center;
+    align-self: end;
+    background-color: grey;
+    box-sizing: border-box;
+    overflow: auto;
+    overflow-x: hidden;
+    border-radius: 10px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.container>div:first-child {
+    border-bottom: 2px solid black;
+    padding: 0px 8px;
+}
+
+.header>div {
+    border-right: 2px solid black;
+}
+
+.header>div:last-child {
+    border-right: 0px solid black;
+}

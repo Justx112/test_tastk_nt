@@ -1,29 +1,29 @@
-export interface IError {
-    errorInstrument: boolean,
-    errorAmount: boolean,
+import { Instrument, OrderStatus } from "../../Enums"
+import { MarketMessage } from "../../Models/ServerMessages"
+
+export interface IMarketMessage {
+    id: number,
+    date: number,
+    status: OrderStatus,
+    amount: number,
+    price: number,
 }
 
-const defaultState:IError={
-    errorInstrument:false,
-    errorAmount:false,
+const defaultState:MarketMessage =  {
+    subscriptionId: "",
+    instrument: Instrument.eur_rub,
+    quotes: []
 }
 
-const setInstrumentError = "SET_TYPE_ERROR"
-const resetInstrument = "RESET_TYPE_ERROR"
-const setAmountError = "SET_AMOUNT_ERROR"
-const resetAmountError = "RESET_AMOUNT_ERROR"
+const getMarket = "GET_MARKET"
 
-export const errorTerminalReducer = (state = defaultState, action: any): IError => {
+export const errorTerminalReducer = (state = defaultState, action: any): MarketMessage => {
     switch (action.type) {
-        case setInstrumentError:
-            return { ...state, errorInstrument: action.payload }
-        case setAmountError:
-            return {...state, errorAmount: action.payload}
-
+        case getMarket:
+            return action.payload
         default:
             return state
     }
 }
 
-export const setInstrumentErrorAction = (payload: boolean) => ({ type: setInstrumentError, payload: payload })
-export const setAmountErrorAction = (payload: boolean) => ({ type: setAmountError, payload: payload })
+export const getMarketAction = (instrument: MarketMessage) => ({ type: getMarket, payload: instrument })
